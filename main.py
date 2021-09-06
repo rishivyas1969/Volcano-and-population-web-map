@@ -24,9 +24,9 @@ for i in range(len(data)):
     fg.add_child(folium.Marker(
         location=[data.iloc[i]["LAT"], data.iloc[i]["LON"]],
         popup=pop,
-        icon=icon
-            )
-            )
+        icon=icon))
+
+fg.add_child(folium.GeoJson(open("world.json", 'r', encoding="utf-8-sig").read()))
 
 map.add_child(fg)
 map.save("map.html")
