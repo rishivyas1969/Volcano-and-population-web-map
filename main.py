@@ -6,13 +6,13 @@ data = pandas.read_csv("Volcanoes.txt")
 
 def icon_producer(ele):
     if ele<1000 :
-        return "green.png"
+        return "icons/green.png"
     elif 1000 <= ele < 3000 :
-        return "orange.png"
+        return "icons/orange.png"
     else:
-        return "red.png"
+        return "icons/red.png"
 
-map = folium.Map(location=[40.178, -99.903], zoom_start=6, tiles="OpenStreetMap")
+map = folium.Map(location=[40.178, -99.903], zoom_start=4, tiles="CartoDB positron")
 
 fg = folium.FeatureGroup(name+"My Map")
 
@@ -26,7 +26,9 @@ for i in range(len(data)):
         popup=pop,
         icon=icon))
 
-fg.add_child(folium.GeoJson(open("world.json", 'r', encoding="utf-8-sig").read()))
+fg.add_child(folium.GeoJson(open("world.json", 'r', encoding="utf-8-sig").read(),
+style_function= lambda x: {'fillColor': 'green' if x["properties"]["POP2005"] < 10000000
+else 'orange' if 10000000 <= x["properties"]["POP2005"] < 20000000 else 'red'}))
 
 map.add_child(fg)
 map.save("map.html")
