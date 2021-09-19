@@ -12,7 +12,7 @@ def icon_producer(ele):
     else:
         return "icons/red.png"
 
-map = folium.Map(location=[40.178, -99.903], zoom_start=3, tiles="CartoDB positron")
+map = folium.Map(location=[40.178, -99.903], zoom_start=3, tiles="CartoDB dark_matter")
 
 fgv = folium.FeatureGroup("Volcanoes")
 
